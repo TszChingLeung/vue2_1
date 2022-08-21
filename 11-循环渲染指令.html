@@ -19,9 +19,13 @@
             <tbody>
                 <!-- in 是固定写法，item 可以随便起名，list 对应数组名字-->
                 <!-- 这里还验证了在 tr 上能不能使用 item 属性 -->
-                <!-- 官方建议：只要用到了 v-for 指令，那么一定要绑定一个 :key 属性 -->
+                <!-- 官方建议：只要用到了 v-for 指令，那么一定要绑定一个 :key 属性，因为后面开发写在 .vue 文件中
+                    不写key属性会直接报错 -->
                 <!-- 而且，尽量把 id 作为 key 的值 -->
-                <tr v-for="(item, index) in list" :title="item.name + index">
+                <!-- 官方对 key 的值类型，是有要求的：必须是字符串或数字类型 -->
+                <!-- 这里的 key="item.name" 也是可以的，但是最好不要这样，因为名字有可能是一样的 -->
+                <!-- key 的值是千万不能重复的，否则会终端报错：Duplicate keys detected: -->
+                <tr v-for="(item, index) in list" :key="item.id">
                     <td>{{ index }}</td>
                     <td>{{ item.id }}</td>
                     <td>{{ item.name }}</td>
@@ -43,7 +47,8 @@
                 list: [
                     { id: 1,name: '张三' },
                     { id: 2,name: '李四' },
-                    { id: 3,name: '王五' }
+                    { id: 3,name: '王五' },
+                    { id: 4,name: '张三' }
                 ]
             }
         })
