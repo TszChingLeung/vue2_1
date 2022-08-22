@@ -82,6 +82,8 @@
       data: {
         // 用户输入的品牌名称
         brand: '',
+        // nextId 是下一个，可用的 id
+        nextId: 4,
         // 品牌的列表数据
         list: [
           { id: 1, name: '宝马', status: true, time: new Date() },
@@ -106,7 +108,20 @@
           //console.log(this.brand);
 
           // 如果没有被 return 出去，应该执行添加的逻辑
-          console.log('111');
+          // 1. 先把要添加的品牌对象，整理出来
+          const obj = {
+            id: this.nextId,
+            name: this.brand,
+            status: true,
+            time: new Date()
+          }
+
+          // 2. 往 this.list 数组中 push 步骤 1 中得到的对象
+          this.list.push(obj);
+
+          // 3. 清空 this.brand; 让 this.nextId 自增 +1
+          this.brand = '';
+          this.nextId++;
         }
       }
     })
